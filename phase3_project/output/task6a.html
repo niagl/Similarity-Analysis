@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+			$.ajax({
+				url: "task6a_output.txt",
+				dataType: "text",
+				success: function (data) {
+						var str = data;
+						var str_array = str.split('\n');
+						for (var i = 0; i < str_array.length; i++) {
+							if(str_array[i]=="####"){
+								var br_element = document.createElement("br");
+								$('#images').append(br_element);
+							}
+							else if(str_array[i].split(" ")[0]=="Label"){
+								var div_element = document.createElement("div");
+								var h3_element = document.createElement("h3");
+								h3_element.innerHTML = str_array[i];
+								$('#images').append(h3_element);
+							}
+							else{
+								var div_element_3 = document.createElement("div");
+								div_element_3.style="width:210px; display:inline-block;"
+								str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+								var img_elem = document.createElement("IMG");
+								img_elem.src = "../images/" + str_array[i] + ".jpg";
+								img_elem.style = "width: 200px; height: 200px; border: 5px solid black;";
+								$(div_element_3).append(img_elem);		
+								var div_element_2 = document.createElement("div");
+								div_element_2.innerHTML =str_array[i];
+								div_element_2.style = "width:200px;"
+								$(div_element_3).append(div_element_2);	
+
+								$('#images').append(div_element_3);
+							}
+						}
+
+				} 
+			});
+	});
+</script>
+</head>
+<body>
+<h1>Task 6a</h1>
+
+<div id="images"></div>
+
+</body>
+</html>
